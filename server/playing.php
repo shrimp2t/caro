@@ -11,9 +11,15 @@ user_update_last_log($user_id);
 
 $row =  $db->get_row(" SELECT * FROM `rooms` WHERE `room_id`= ".$room_id);
 
-if($_REQUEST['winner']==1){
+if($_REQUEST['winner']==1 ||  $_REQUEST['loser']==1){
+
     $data = array();
-    $data['winner'] = $user_id;
+    if($_REQUEST['winner']==1){
+        $data['winner'] = $payer_id;
+    }else{
+        $data['winner'] = $payer_id ==1  ? $row->player_2 : $row->player_1;
+    }
+
 
     // xóa data cũ đi
     $data['tracking'] = '';
@@ -49,6 +55,8 @@ if($type=='move'){
         $data['turn']=1;
     }
 
+    //$data['player_'.$data['turn'].'_stt'] = '';
+
     $data['last_pos']= "$i-$j";
 
     if($db->update('rooms',$data,' room_id = '.$room_id) ){
@@ -79,6 +87,8 @@ if($type=='move'){
             $respond['winner'] =  'other';
         }
     }
+
+
 
     echo json_encode($respond);
     die();

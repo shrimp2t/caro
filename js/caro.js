@@ -122,22 +122,6 @@ function clk(iMove,jMove) {
         item: [iMove,jMove, userSq ]
     });
 
-    /*
-    if (winningPos(iMove,jMove,userSq)==winningMove){
-        if(game_over!=true){
-            clearTimeout(playingTimeout);
-            //setTimeout("alert('You won!');",dly);
-            alert('Bạn đã giành chiến thắng !');
-            $('.turning').html('Bạn đã thắng');
-            game_over =  true;
-        }
-
-    }else{
-        //setTimeout("machineMove(iLastUserMove,jLastUserMove);",200);
-        playingTimeout = setTimeout(machineMove,500);
-    }
-    */
-
     playingTimeout = setTimeout(machineMove,500);
 
     return false;
@@ -157,20 +141,21 @@ function machineMove() {
         'game_action': 'playing',
         'type': 'machine_move'
     }, function(respond){
+
+        if(respond.winner=='you'){
+            display_game_noti('Bạn đã giành chiến thắng !', 'win');
+            game_over =  true;
+            clearTimeout(playingTimeout);
+            return ;
+        }else if(respond.winner=='other'){
+
+            display_game_noti('Bạn đã thua !', 'lose');
+            game_over =  true;
+            clearTimeout(playingTimeout);
+            return ;
+        }
+
         if(respond.status==1){
-
-            if(respond.winner=='you'){
-                display_game_noti('Bạn đã giành chiến thắng !', 'win');
-                game_over =  true;
-                clearTimeout(playingTimeout);
-                return ;
-            }else if(respond.winner=='other'){
-                display_game_noti('Bạn đã thua !', 'lose');
-                game_over =  true;
-                clearTimeout(playingTimeout);
-                return ;
-            }
-
 
             if(respond.turn==GAME_SETTINGS.player_id){
                 myTurn = false;
@@ -190,20 +175,6 @@ function machineMove() {
                     type:"user_moved",
                     item: [respond.last_pos.i,respond.last_pos.j, machSq ]
                 });
-
-
-
-                /*
-                if (winningPos(respond.last_pos.i,respond.last_pos.j,machSq)==winningMove) {
-                   if( game_over != true){
-                       clearTimeout(playingTimeout);
-                       alert('Bạn đã thua !'); // đôi phương thắng
-                       game_over =  true;
-                   }
-                }else{
-
-                }
-                */
 
             }
 
@@ -464,6 +435,21 @@ $(document).ready(function(){
 
     }
 
+
+    function request_loser(){
+        send_request({
+            'game_action': 'playing',
+            'room_id': GAME_SETTINGS.room_id,
+            'loser': 1
+        }, function(respond){
+
+        });
+
+    }
+
+
+
+
     if(typeof(game_tracking)){
         //f = $.parseJSON(game_tracking);
         if(game_tracking.length>0){
@@ -472,10 +458,12 @@ $(document).ready(function(){
             if (winningPos(game_last_pos[0],game_last_pos[1],userSq)==winningMove){
                 display_game_noti('Bạn đã giành chiến thắng !', 'win');
                 request_winner();
+
                 game_over =  true;
 
             }else if (winningPos(game_last_pos[0],game_last_pos[1],machSq)==winningMove){
                 display_game_noti('Bạn đã thua !', 'lose');
+                request_loser();
                 game_over =  true;
             }
 

@@ -3,6 +3,14 @@ include('config.php');
 go_home_if_not_logged_in();
 
 $room =  get_room_by_id($_SESSION['room_id']);
+$data = array();
+
+
+$data['winner']=0;
+if($db->update('rooms',$data,' room_id = '.$room->room_id) ){
+
+}
+
 
 if($room->room_id<=0){
     go_to('rooms.php');
