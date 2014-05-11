@@ -22,8 +22,40 @@ function do_user_login($data){
 function do_logout(){
     global $db;
     $db->update('users', array('status'=>'logged_out'),'user_id='.$_SESSION['user']->user_id);
-    $db->update('rooms', array('player_2'=>'0','player_2_stt'=>'','status'=>'waiting'),'player_2='.$_SESSION['user']->user_id);
-    $db->update('rooms', array('player_1'=>'0','player_2_stt'=>'','status'=>'waiting'),'player_1='.$_SESSION['user']->user_id);
+
+    if($_SESSION['room_id']>0){
+
+          $room = get_room_by_id($_SESSION['room_id']);
+          if($room->room_id>0){
+
+              if($_SESSION['player_id']==2){ // khách thoát
+                  $data['player_2'] =null;
+                  $data['status'] ='waiting';
+                  $data['tracking'] ='';
+                  $data['winner'] = $room->player_1;
+
+
+                  $db->update('rooms',$data,' room_id= '.$_SESSION['room_id']);
+
+              }else{ // _SESSION['player_id'] = 1 chủ phòng thoát, Người khác sẽ làm chủ phòng thay thế hoặc xóa phòng
+                  $data['player_1'] = null;
+                  $data['status'] ='waiting';
+                  $data['tracking'] ='';
+                  $data['winner'] = $room->player_2;
+                  $db->update('rooms',$data,' room_id= '.$_SESSION['room_id']);
+              }
+          }
+
+          // kiểm tra xem còn ai ko trong phòng ko nếu ko ở trong phòng thì sẽ xóa phòng nay
+          $room = get_room_by_id($room->room_id);
+          if($room->player_1<=0 && $room->player_2<=0){
+              $db->delete('rooms', array('room_id'=> $room->room_id));
+          }
+
+          unset($_SESSION['room_id'], $_SESSION['player_id']);
+      }
+
+
 
     unset( $_SESSION['user'] );
     unset($_SESSION['room_id'], $_SESSION['player_id']);
