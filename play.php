@@ -81,6 +81,7 @@ if($_SESSION['player_id']==1){
 
             <div class="toolbar">
                 <a href="" class="stop-playing">Rời phòng</a>
+                <a target="_blank" href="help.php">Luật chơi</a>
                 <a href="index.php?action=logout">Thoát Game</a>
             </div>
 
@@ -93,7 +94,7 @@ if($_SESSION['player_id']==1){
                 <div class="sp">vs</div>
                 <div class="user-2 user"><?php echo $user_2->user_nice_name !='' ? $user_2->user_nice_name  :  $user_2->user_login; ?></div>
             </div>
-            <div>Bạn đi quân <img src="images/s1.png"> Đối phương quân <img src="images/s-1.png"> </div>
+            <div class="player-note">Bạn đi quân <img src="images/s1.png"> Đối phương quân <img src="images/s-1.png"> </div>
         </div>
         
 

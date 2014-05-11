@@ -9,7 +9,7 @@ body{
 a{ text-decoration: none; color: #333333;}
 .clear{ clear: both}
 .clearfix:after{ clear:  both; display:  block; content: " ";}
-.wrap{  width: 520px;  margin: 0 auto; }
+.wrap{  width: 550px;  margin: 0 auto; }
 input[type="text"], input[type="password"]{
     border: 1px solid #cccccc;
     padding: 5px;
@@ -76,7 +76,11 @@ input.inp-name{ width: 320px; display: inline; }
 
 
 /* Toolbar */
+.toolbar{  padding: 10px 0px;}
 .toolbar a{ margin-right: 15px; }
+
+.player-note{ text-align:  center; line-height: 30px; margin: 20px 0px;}
+.player-note img{ vertical-align: middle;}
 
 
 

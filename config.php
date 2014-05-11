@@ -21,11 +21,11 @@ ob_start();
 
 include('lib/functions.php');
 include('lib/db.php');
+include('lib/gaming.php');
 
 $db =  new db(DB_HOST,DB_USER,DB_PASS,DB_NAME);
 
 include('lib/user.php');
-
 
 
 if(is_user_logged_in()){

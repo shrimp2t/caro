@@ -70,6 +70,9 @@ if(empty($row->room_id) || $row->room_id<=0){
             $respond['short_msg'] = 'all_ready'; // cả 2 người đã sẵn sàng
             //$data = array('tracking'=>'');
             $respond['turn']= $row->turn;
+            $data['winner']='';
+            $data['tracking'] ='';
+            $data['last_pos'] ='';
             $db->update('rooms',$data,' room_id= '.$row->room_id);
 
         }elseif($row->player_1_stt=='R' && $row->player_2_stt!=='R'){

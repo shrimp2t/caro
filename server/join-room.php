@@ -1,5 +1,8 @@
 <?php
 
+$user_id =  $_SESSION['user']->user_id;
+// user_update_last_log($user_id);
+
 $row =  $db->get_row(" SELECT * FROM `rooms` WHERE `room_id`= ".intval($_REQUEST['room_id']));
 
 $respond= array();

@@ -13,12 +13,20 @@ function check_user_pass($password_text, $encode_pass){
 }
 
 function do_user_login($data){
+    global $db;
     $_SESSION['user'] =  $data;
+    $db->update('users', array('status'=>'logged_in'),'user_id='.$_SESSION['user']->user_id);
 
 }
 
 function do_logout(){
+    global $db;
+    $db->update('users', array('status'=>'logged_out'),'user_id='.$_SESSION['user']->user_id);
+    $db->update('rooms', array('player_2'=>'0','player_2_stt'=>'','status'=>'waiting'),'player_2='.$_SESSION['user']->user_id);
+    $db->update('rooms', array('player_1'=>'0','player_2_stt'=>'','status'=>'waiting'),'player_1='.$_SESSION['user']->user_id);
+
     unset( $_SESSION['user'] );
+    unset($_SESSION['room_id'], $_SESSION['player_id']);
 }
 
 
@@ -27,6 +35,8 @@ function login($user_login, $pass){
     $sql =" SELECT  * FROM `users` WHERE user_login = '".mysql_real_escape_string($user_login)."' LIMIT 1 ";
 
     $row =  $db->get_row($sql);
+
+
     if(check_user_pass($pass,$row->user_pass)){
          do_user_login($row);
         return true;
@@ -184,7 +194,8 @@ function user_update_last_log($user_id, $now = true, $unixtime = '' ){
 
     global $db;
 
-    $user_data = array('last_log'=>$time);
+    $user_data = array('last_log'=>$time,'status'=>'logged_in');
+    
 
     return  $db->update('users',$user_data,'user_id = '.$user_id);
 

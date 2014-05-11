@@ -26,6 +26,7 @@ function send_request(data,success_cb, error_cb){
 
 /// lightbox
 function lightbox_open(call_back){
+    $('.lb_overlay, .lb_box_inside').remove();
     $('body').append('<div class="lb_overlay"></div>');
     $('body').append('<div class="lb_content"><div class="lb_box_inside"><div class="lb_box_inside_c"></div></div></div>');
     if(typeof (call_back)=='function'){

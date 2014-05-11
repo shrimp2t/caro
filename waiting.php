@@ -33,6 +33,7 @@ $game_settings = array(
         <div class="wrap">
             <div class="toolbar">
                 <a href="rooms.php?action=left-room">Rời phòng</a>
+                <a target="_blank" href="help.php">Luật chơi</a>
                 <a href="index.php?action=logout">Thoát Game</a>
             </div>
             <div class="clock turning">
@@ -44,7 +45,7 @@ $game_settings = array(
                 <div class="sp">vs</div>
                 <div class="user-2 user">(Đang chờ...)</div>
             </div>
-            <div>Bạn đi quân <img src="images/s1.png"> Đối phương quân <img src="images/s-1.png"> </div>
+            <div class="player-note">Bạn đi quân <img src="images/s1.png"> Đối phương quân <img src="images/s-1.png"> </div>
         </div>
         
 

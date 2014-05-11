@@ -61,7 +61,6 @@ function display_game_noti(content, win_or_lose){
         }
 
         $('.lb_close').click(function(){
-
             lightbox_close();
             window.location='waiting.php';
             return false;
@@ -97,7 +96,7 @@ function clk(iMove,jMove) {
     }
 
     if (f[iMove][jMove]!=0) {
-        alert('Ô này đã được chọn. Vui lòng chọn ô khác !');
+      // alert('Ô này đã được chọn. Vui lòng chọn ô khác !');
         // ô này đã dc tick vui lòng chọn ô khác
         return;
     }
@@ -116,13 +115,11 @@ function clk(iMove,jMove) {
 
     });
 
-
     $( "body" ).trigger({
         type:"user_moved",
         item: [iMove,jMove, userSq ]
     });
 
-    playingTimeout = setTimeout(machineMove,500);
 
     return false;
 }
@@ -132,8 +129,12 @@ function clk(iMove,jMove) {
 // may tu dong di -- ngươi khác đi
 function machineMove() {
 
+    //return false;
+
+    clearTimeout(playingTimeout);
+
     if(game_over ==  true){
-        clearTimeout(playingTimeout);
+
         return;
     }
 
@@ -142,18 +143,37 @@ function machineMove() {
         'type': 'machine_move'
     }, function(respond){
 
-        if(respond.winner=='you'){
-            display_game_noti('Bạn đã giành chiến thắng !', 'win');
-            game_over =  true;
-            clearTimeout(playingTimeout);
-            return ;
-        }else if(respond.winner=='other'){
 
-            display_game_noti('Bạn đã thua !', 'lose');
+        if(respond.status=='out'){
+            display_game_noti('Đối phơng đã thoát !', 'lose');
             game_over =  true;
             clearTimeout(playingTimeout);
             return ;
         }
+
+        if(respond.winner=='you'){
+            writeBoard();
+           // request_winner();
+            display_game_noti('Bạn đã giành chiến thắng !', 'win');
+            game_over =  true;
+            clearTimeout(playingTimeout);
+
+            return ;
+        }else if(respond.winner=='other'){
+            writeBoard();
+            //request_loser();
+            display_game_noti('Bạn đã thua !', 'lose');
+            game_over =  true;
+            clearTimeout(playingTimeout);
+            return ;
+        }else if(respond.winner=='no_body'){
+            writeBoard();
+            display_game_noti('Hòa  -  Hai bạn thật là kỳ phòng dịch thủ !!!', 'lose');
+            game_over =  true;
+            clearTimeout(playingTimeout);
+            return ;
+        }
+
 
         if(respond.status==1){
 
@@ -171,19 +191,10 @@ function machineMove() {
 
                 drawSquare(respond.last_pos.i,respond.last_pos.j,machSq);
 
-                $( "body" ).trigger({
-                    type:"user_moved",
-                    item: [respond.last_pos.i,respond.last_pos.j, machSq ]
-                });
-
             }
-
-
-
-
         }
 
-        playingTimeout  = setTimeout(machineMove,500);
+        playingTimeout  = setTimeout(machineMove,1000);
     });
 
 
@@ -196,7 +207,8 @@ dirA=new Array();
 
 
 function displayWin(track){
-    console.debug(track);
+    return ;
+    //console.debug(track);
     if(track.length==0){
         return;
     }
@@ -209,114 +221,6 @@ function displayWin(track){
 }
 
 
-// kiem tra chien thang hay ko ?
-function winningPos(i,j,mySq) {
-
-    i = parseInt(i);
-    j = parseInt(j);
-
-
-    track = new Array();
-    track[0] = i+'-'+j;
-
-    // --- Kiểm Tra hàng ngang ---
-
-    L=1;
-    m=1;
-    while (j+m<boardSize  && f[i][j+m]==mySq) {
-        track[L] = i+'-'+(j+m);
-        L++; m++;
-
-    }
-
-    m1=m;
-    m=1;
-
-    while (j-m>=0 && f[i][j-m]==mySq) {
-        track[L] = i+'-'+(j-m);
-        L++; m++;
-
-    }
-
-    m2=m;
-    // nếu nhiều hơn 4 điểm liền nhau
-    if (L>4) {
-        displayWin(track);
-        return winningMove;
-    }
-
-
-    // ------------------Kiểm Tra hàng dọc ---------------------------
-
-    L=1;
-    m=1;
-    while (i+m<boardSize  && f[i+m][j]==mySq) {
-        track[L]=(i+m)+'-'+(j);
-        L++; m++;
-
-    }
-    m=1;
-    while (i-m>=0 && f[i-m][j]==mySq) {
-        track[L]=(i-m)+'-'+j;
-        L++; m++;
-
-    }
-
-    // nếu nhiều hơn 4 điểm liền nhau
-    if (L>4) {
-        displayWin(track);
-        return winningMove;
-    }
-
-    //----------------- Kiểm tra đường chéo chính  \ ---------------------------
-    L=1;
-    m=1;
-    while (i+m<boardSize && j+m<boardSize && f[i+m][j+m]==mySq) {
-        track[L]=(i-m)+'-'+(j+m);
-        L++; m++;
-
-    }
-    m1=m;
-    m=1;
-
-    while (i-m>=0 && j-m>=0 && f[i-m][j-m]==mySq) {
-        track[L]=(i-m)+'-'+(j-m);
-        L++; m++;
-
-
-    }
-
-    // nếu nhiều hơn 4 điểm liền nhau
-    if (L>4) {
-        displayWin(track);
-        return winningMove;
-    }
-
-
-    //--------- Kiểm tra đường chéo phụ ----------
-    L=1;
-    m=1;
-    while (i+m<boardSize  && j-m>=0 && f[i+m][j-m]==mySq) {
-        track[L]=(i+m)+'-'+(j-m);
-        L++; m++;
-    }
-
-    m=1;
-    while (i-m>=0 && j+m<boardSize && f[i-m][j+m]==mySq) {
-        track[L]=(i-m)+'-'+(j+m);
-        L++; m++;
-
-    }
-
-    // nếu nhiều hơn 4 điểm liền nhau
-    if (L>4) {
-        displayWin(track);
-        return winningMove;
-    }
-
-    return -1;
-
-}
 // ve hinh x hoac o
 
 function drawSquare(par1,par2,par3) {
@@ -331,6 +235,11 @@ function writeBoard () {
     buf='';
     for (i=0;i<boardSize;i++) {
         for (j=0;j<boardSize;j++) {
+
+            if(typeof (f[i][j])==='undefined'){
+                f[i][j]=0;
+            }
+
            // buf+='\n><a href="#s" onClick="top.clk('+i+','+j+');if(top.ie4)this.blur();return false;" ><img name="s'+i+'_'+j+'" src="images/s'+f[i][j]+'.gif" width=16 height=16 border=0></a';
             buf+= '<a class="i-'+i+' j-'+j+'  ij-'+i+'-'+j+'" href="#s" id="s'+i+'_'+j+'" onclick="clk('+i+','+j+');return false;" ><img  name="s'+i+'_'+j+'" src="'+image_path+'s'+f[i][j]+'.png"></a> ';
 
@@ -368,6 +277,7 @@ function resetGame() {
 
 
 function check_ready_paying(){
+
     send_request({
         'game_action': 'check-player',
         'room_id': GAME_SETTINGS.room_id,
@@ -376,7 +286,6 @@ function check_ready_paying(){
 
         if(respond.short_msg=='all_ready'){
             writeBoard();
-
             if(respond.turn==GAME_SETTINGS.player_id){
                 myTurn = false;
             }else{
@@ -385,10 +294,10 @@ function check_ready_paying(){
 
 
             display_turning(myTurn);
-            playingTimeout =  setTimeout(machineMove, 500);
+            playingTimeout =  setTimeout(machineMove, 1000);
             clearTimeout(gameTimeOut);
         }else{
-            gameTimeOut = setTimeout(check_ready_paying, 500);
+            gameTimeOut = setTimeout(check_ready_paying, 1000);
         }
     });
 
@@ -403,9 +312,9 @@ function do_ready_playing(){
 
 
 function init() {
-   // writeBoard();
+  // writeBoard();
    //  resetGame();
-    gameTimeOut = setTimeout(check_ready_paying, 500);
+    gameTimeOut = setTimeout(check_ready_paying, 1000);
 }
 
 
@@ -419,85 +328,68 @@ function bunload(){
 */
 
 
+function request_winner(){
+    send_request({
+        'game_action': 'playing',
+        'room_id': GAME_SETTINGS.room_id,
+        'winner': 1
+    }, function(respond){
+
+    });
+
+}
+
+
+function request_loser(){
+    send_request({
+        'game_action': 'playing',
+        'room_id': GAME_SETTINGS.room_id,
+        'loser': 1
+    }, function(respond){
+
+    });
+
+}
+
+
+
 
 
 $(document).ready(function(){
     init();
     // kiểm tra chiến thắng
-    function request_winner(){
-        send_request({
-            'game_action': 'playing',
-            'room_id': GAME_SETTINGS.room_id,
-            'winner': 1
-        }, function(respond){
+    // display_game_noti('Bạn đã giành chiến thắng !', 'win');
+   // display_game_noti('Bạn đã thua !', 'lose');
 
-        });
-
-    }
+    /*
+    $('body').on('user_moved',function(item){
+        var data =  item.item;
+        data[2] = parseInt(data[2]);
 
 
-    function request_loser(){
-        send_request({
-            'game_action': 'playing',
-            'room_id': GAME_SETTINGS.room_id,
-            'loser': 1
-        }, function(respond){
+        clearTimeout(gameTimeOut);
+        clearTimeout(playingTimeout);
 
-        });
+        game_over =  true;
 
-    }
-
-
-
+    });
+    */
 
     if(typeof(game_tracking)){
         //f = $.parseJSON(game_tracking);
         if(game_tracking.length>0){
             f = game_tracking;
-
-            if (winningPos(game_last_pos[0],game_last_pos[1],userSq)==winningMove){
-                display_game_noti('Bạn đã giành chiến thắng !', 'win');
-                request_winner();
-
-                game_over =  true;
-
-            }else if (winningPos(game_last_pos[0],game_last_pos[1],machSq)==winningMove){
-                display_game_noti('Bạn đã thua !', 'lose');
-                request_loser();
-                game_over =  true;
-            }
+            writeBoard();
 
         }
     }
 
-    $('body').on('user_moved',function(item){
-        var data =  item.item;
-        data[2] = parseInt(data[2]);
-        if (winningPos(data[0],data[1],data[2])==winningMove){
-            if(game_over!=true){
-
-
-                if(data[2]==1){
-                   // alert('Bạn đã giành chiến thắng !');
-                    display_game_noti('Bạn đã giành chiến thắng !', 'win');
-                    request_winner();
-                }else{
-                    display_game_noti('Bạn đã thua !', 'lose');
-                }
-
-                game_over =  true;
-            }
-
-            clearTimeout(gameTimeOut);
-            clearTimeout(playingTimeout);
-        }
-
-    });
-
     // khi đang chơi mà có ai đó rời phòng
     $('.stop-playing').click(function(){
         var c = confirm('Rời khỏi phòng ? -  Bạn sẽ bị sử thua, Bạn có muốn tiếp tục');
-
+        if(c){
+            window.location='rooms.php?action=left-room';
+        }
         return false;
     });
 

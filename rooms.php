@@ -12,17 +12,19 @@ if($_REQUEST['action']=='left-room'){
         if($_SESSION['player_id']==2){ // khách thoát
             $data['player_2'] =null;
             $data['status'] ='waiting';
+            $data['tracking'] ='';
+            $data['winner'] = $room->player_1;
+
 
             $db->update('rooms',$data,' room_id= '.$_SESSION['room_id']);
 
         }else{ // _SESSION['player_id'] = 1 chủ phòng thoát, Người khác sẽ làm chủ phòng thay thế hoặc xóa phòng
             $data['player_1'] = null;
             $data['status'] ='waiting';
+            $data['tracking'] ='';
+            $data['winner'] = $room->player_2;
             $db->update('rooms',$data,' room_id= '.$_SESSION['room_id']);
         }
-
-
-
     }
 
     // kiểm tra xem còn ai ko trong phòng ko nếu ko ở trong phòng thì sẽ xóa phòng nay
@@ -38,7 +40,6 @@ if($_REQUEST['action']=='left-room'){
 // ------- Hết  Rời phòng ------
 
 
-
 //-----Tạo phòng ------
 
 $msg = '';
@@ -46,6 +47,7 @@ if($_REQUEST['create_room']!=''){
     $data['player_1'] = $_SESSION['user']->user_id;
     $data['status'] = 'waiting';
     $data['player_1'] = $_SESSION['user']->user_id;
+
     if(trim($_REQUEST['room_name'])==''){
         $data['room_name']= $settings['default_room_name'];
     }else{
@@ -74,7 +76,7 @@ global $db;
 if($_SESSION['room_id']>0){
     $room =  get_room_by_id($_SESSION['room_id']);
 
-    if($room->room_id>0){
+    if($room->room_id>0 && ( $_SESSION['user']->user_id==$room->payer_1 || $_SESSION['user']->user_id==$room->payer_2  ) ){
         go_to('waiting.php?r='.$_SESSION['room_id']);
     }else{
         $_SESSION['room_id']='';
@@ -97,7 +99,9 @@ if($_SESSION['room_id']>0){
         <div class="wrap">
             <div class="usr-logged-in">
                 xin chào: <?php display_user_name(); ?>
+                <a target="_blank" href="help.php">Luật chơi</a>
                 <a href="index.php?action=logout">Thoát</a>
+
             </div>
 
             <div id="rooms">

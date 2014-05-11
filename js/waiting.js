@@ -17,6 +17,7 @@ var gameTimeOut;
 
 function start_game(){
     $('.start-game').click(function(){
+        $(this).remove();
         send_request({
             'game_action': 'check-player',
             'room_id': GAME_SETTINGS.room_id,
