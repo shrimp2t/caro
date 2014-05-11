@@ -26,10 +26,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="user.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="user.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/user.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="4" selection-start="538" selection-end="538" vertical-scroll-proportion="0.24836601" vertical-offset="225" max-vertical-offset="5497">
+            <state line="25" column="4" selection-start="538" selection-end="538" vertical-scroll-proportion="-11.692307" vertical-offset="225" max-vertical-offset="5497">
               <folding />
             </state>
           </provider>
@@ -48,7 +48,15 @@
         <entry file="file://$PROJECT_DIR$/rooms.php">
           <provider selected="true" editor-type-id="text-editor">
             <state line="35" column="55" selection-start="132" selection-end="1167" vertical-scroll-proportion="-30.961538" vertical-offset="0" max-vertical-offset="2921">
-              <folding />
+              <folding>
+                <marker date="1397408358000" expanded="true" signature="2393:3590" placeholder="..." />
+                <marker date="1397408358000" expanded="true" signature="2404:2810" placeholder="..." />
+                <marker date="1397408358000" expanded="true" signature="2821:3582" placeholder="..." />
+                <marker date="1397408358000" expanded="true" signature="2848:3569" placeholder="..." />
+                <marker date="1397408358000" expanded="true" signature="2888:3089" placeholder="..." />
+                <marker date="1397408358000" expanded="true" signature="3119:3139" placeholder="..." />
+                <marker date="1397408358000" expanded="true" signature="3293:3552" placeholder="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -62,19 +70,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="gaming.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/gaming.php">
+      <file leaf-file-name="functions.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/functions.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="0" selection-start="220" selection-end="220" vertical-scroll-proportion="-4.025" vertical-offset="0" max-vertical-offset="2760">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="943">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="functions.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/functions.php">
+      <file leaf-file-name="caro.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/js/caro.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="943">
+            <state line="147" column="38" selection-start="2618" selection-end="2618" vertical-scroll-proportion="0.2024" vertical-offset="3128" max-vertical-offset="9292">
               <folding />
             </state>
           </provider>
@@ -93,7 +101,16 @@
         <entry file="file://$PROJECT_DIR$/play.php">
           <provider selected="true" editor-type-id="text-editor">
             <state line="23" column="42" selection-start="456" selection-end="478" vertical-scroll-proportion="-20.346153" vertical-offset="0" max-vertical-offset="2461">
-              <folding />
+              <folding>
+                <marker date="1395030539000" expanded="true" signature="643:3158" placeholder="..." />
+                <marker date="1395030539000" expanded="true" signature="654:2282" placeholder="..." />
+                <marker date="1395030539000" expanded="true" signature="937:2139" placeholder="..." />
+                <marker date="1395030539000" expanded="true" signature="2293:3150" placeholder="..." />
+                <marker date="1395030539000" expanded="true" signature="2320:3128" placeholder="..." />
+                <marker date="1395030539000" expanded="true" signature="2355:2566" placeholder="..." />
+                <marker date="1395030539000" expanded="true" signature="2607:2627" placeholder="..." />
+                <marker date="1395030539000" expanded="true" signature="2705:2988" placeholder="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -102,7 +119,9 @@
         <entry file="file://$PROJECT_DIR$/server/playing.php">
           <provider selected="true" editor-type-id="text-editor">
             <state line="121" column="45" selection-start="3113" selection-end="3113" vertical-scroll-proportion="-25.846153" vertical-offset="2111" max-vertical-offset="3335">
-              <folding />
+              <folding>
+                <marker date="1399808880000" expanded="true" signature="1244:1353" placeholder="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -137,11 +156,11 @@
         <option value="$PROJECT_DIR$/server/do-ready.php" />
         <option value="$PROJECT_DIR$/lib/gaming.php" />
         <option value="$PROJECT_DIR$/test.php" />
-        <option value="$PROJECT_DIR$/js/caro.js" />
         <option value="$PROJECT_DIR$/server/check-player.php" />
         <option value="$PROJECT_DIR$/server/playing.php" />
         <option value="/private/var/folders/7l/k85_15ws7cs5zxkytlt2z37c0000gn/T/fz3temp-1/config.php" />
         <option value="$PROJECT_DIR$/lib/user.php" />
+        <option value="$PROJECT_DIR$/js/caro.js" />
       </list>
     </option>
   </component>
@@ -388,13 +407,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/caro.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="131" column="6" selection-start="2331" selection-end="2331" vertical-scroll-proportion="0.0" vertical-offset="2576" max-vertical-offset="9292">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/gaming.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="14" column="0" selection-start="220" selection-end="220" vertical-scroll-proportion="-4.025" vertical-offset="0" max-vertical-offset="2760">
@@ -433,14 +445,25 @@
     <entry file="file://$PROJECT_DIR$/play.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="23" column="42" selection-start="456" selection-end="478" vertical-scroll-proportion="-20.346153" vertical-offset="0" max-vertical-offset="2461">
-          <folding />
+          <folding>
+            <marker date="1395030539000" expanded="true" signature="643:3158" placeholder="..." />
+            <marker date="1395030539000" expanded="true" signature="654:2282" placeholder="..." />
+            <marker date="1395030539000" expanded="true" signature="937:2139" placeholder="..." />
+            <marker date="1395030539000" expanded="true" signature="2293:3150" placeholder="..." />
+            <marker date="1395030539000" expanded="true" signature="2320:3128" placeholder="..." />
+            <marker date="1395030539000" expanded="true" signature="2355:2566" placeholder="..." />
+            <marker date="1395030539000" expanded="true" signature="2607:2627" placeholder="..." />
+            <marker date="1395030539000" expanded="true" signature="2705:2988" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/server/playing.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="121" column="45" selection-start="3113" selection-end="3113" vertical-scroll-proportion="-25.846153" vertical-offset="2111" max-vertical-offset="3335">
-          <folding />
+          <folding>
+            <marker date="1399808880000" expanded="true" signature="1244:1353" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -454,13 +477,28 @@
     <entry file="file://$PROJECT_DIR$/rooms.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="35" column="55" selection-start="132" selection-end="1167" vertical-scroll-proportion="-30.961538" vertical-offset="0" max-vertical-offset="2921">
-          <folding />
+          <folding>
+            <marker date="1397408358000" expanded="true" signature="2393:3590" placeholder="..." />
+            <marker date="1397408358000" expanded="true" signature="2404:2810" placeholder="..." />
+            <marker date="1397408358000" expanded="true" signature="2821:3582" placeholder="..." />
+            <marker date="1397408358000" expanded="true" signature="2848:3569" placeholder="..." />
+            <marker date="1397408358000" expanded="true" signature="2888:3089" placeholder="..." />
+            <marker date="1397408358000" expanded="true" signature="3119:3139" placeholder="..." />
+            <marker date="1397408358000" expanded="true" signature="3293:3552" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/user.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="4" selection-start="538" selection-end="538" vertical-scroll-proportion="0.24836601" vertical-offset="225" max-vertical-offset="5497">
+        <state line="25" column="4" selection-start="538" selection-end="538" vertical-scroll-proportion="-11.692307" vertical-offset="225" max-vertical-offset="5497">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/caro.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="147" column="38" selection-start="2618" selection-end="2618" vertical-scroll-proportion="0.2024" vertical-offset="3128" max-vertical-offset="9292">
           <folding />
         </state>
       </provider>

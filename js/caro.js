@@ -145,7 +145,7 @@ function machineMove() {
 
 
         if(respond.status=='out'){
-            display_game_noti('Đối phơng đã thoát !', 'lose');
+            display_game_noti('Đối phương đã thoát !', 'lose');
             game_over =  true;
             clearTimeout(playingTimeout);
             return ;
